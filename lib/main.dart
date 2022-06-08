@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hiperprof/app/components/hp_text_form_field.dart';
 import 'package:hiperprof/theme/theme_data.dart';
 
 void main() {
@@ -51,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             OutlinedButton(onPressed: () {}, child: Text('Button')),
             ElevatedButton(onPressed: () {}, child: Text('Button')),
+            HPTextFormField(suffix: Icon(Icons.search), label: 'dwa'),
             const Text(
               'You have pushed the button this many times:',
             ),
