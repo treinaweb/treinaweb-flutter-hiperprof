@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hiperprof/app/components/hp_elevated_button.dart';
+import 'package:hiperprof/app/components/hp_outlined_button.dart';
 import 'package:hiperprof/app/components/hp_text_form_field.dart';
+import 'package:hiperprof/app/components/hp_text_form_search.dart';
+import 'package:hiperprof/app/components/ht_text_title.dart';
 import 'package:hiperprof/theme/theme_data.dart';
 
 void main() {
@@ -50,16 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            OutlinedButton(onPressed: () {}, child: Text('Button')),
-            ElevatedButton(onPressed: () {}, child: Text('Button')),
-            HPTextFormField(suffix: Icon(Icons.search), label: 'dwa'),
-            const Text(
-              'You have pushed the button this many times:',
+            HPTextFormSearch(label: 'text search'),
+            HPOutlinedButton(
+              child: Text('dwda'),
+              onPressed: () {},
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            HPElevatedButton(child: Text('dadw'), onPressed: () {}),
+            HPTextTitle(text: 'dwada', size: HPSizeTitle.large)
           ],
         ),
       ),
