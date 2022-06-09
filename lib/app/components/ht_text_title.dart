@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 enum HPSizeTitle {
-  small(size: 15.0),
-  normal(size: 25.0),
-  large(size: 30.0);
+  small(size: 17.0),
+  normal(size: 20.0),
+  large(size: 25.0);
 
   final double size;
 
@@ -13,7 +13,9 @@ enum HPSizeTitle {
 class HPTextTitle extends StatelessWidget {
   final String text;
   final HPSizeTitle size;
-  const HPTextTitle({Key? key, required this.text, required this.size})
+  final Color? color;
+  const HPTextTitle(
+      {Key? key, required this.text, required this.size, this.color})
       : super(key: key);
 
   @override
@@ -21,7 +23,8 @@ class HPTextTitle extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.center,
-      style: TextStyle(fontSize: size.size),
+      style: TextStyle(
+          fontSize: size.size, color: color, fontWeight: FontWeight.bold),
     );
   }
 }
