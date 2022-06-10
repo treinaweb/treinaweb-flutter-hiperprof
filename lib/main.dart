@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hiperprof/app/modules/inicial/views/inicial_view.dart';
+import 'package:hiperprof/app/modules/pesquisa_professor/views/pesquisa_professor_view.dart';
+import 'package:hiperprof/routes.dart';
 import 'package:hiperprof/theme/theme_data.dart';
 
 void main() {
@@ -17,7 +19,10 @@ class MyApp extends StatelessWidget {
       theme: CustomThemeData.ligth(),
       darkTheme: CustomThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: const InicialView(),
+      routes: {
+        Routes.INCIAL: (context) => const InicialView(),
+        Routes.PESQUISA_PROFESSOR: (context) => const PesquisaProfessorView(),
+      },
     );
   }
 }

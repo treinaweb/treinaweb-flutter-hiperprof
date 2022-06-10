@@ -3,14 +3,26 @@ import 'package:hiperprof/app/components/hp_elevated_button.dart';
 import 'package:hiperprof/app/components/hp_outlined_button.dart';
 import 'package:hiperprof/app/components/hp_text_form_search.dart';
 import 'package:hiperprof/app/components/ht_text_title.dart';
+import 'package:hiperprof/app/modules/inicial/controller/inicial_controller.dart';
 
-class InicialView extends StatelessWidget {
+class InicialView extends StatefulWidget {
   const InicialView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final _mediaQuery = MediaQuery.of(context);
+  State<InicialView> createState() => _InicialViewState();
+}
 
+class _InicialViewState extends State<InicialView> {
+  final _key = GlobalKey<FormState>();
+  late final _mediaQuery = MediaQuery.of(context);
+  late final controller = InicialController(
+    isValidForm: () => _key.currentState?.validate() ?? false,
+    onNavigatorProfessor: (route, search) =>
+        Navigator.pushNamed(context, route, arguments: search),
+  );
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -22,6 +34,7 @@ class InicialView extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Form(
+                  key: _key,
                   child: Column(
                     children: [
                       const HPTextTitle(
@@ -29,12 +42,13 @@ class InicialView extends StatelessWidget {
                         size: HPSizeTitle.large,
                       ),
                       HPTextFormSearch(
-                        controller: TextEditingController(),
+                        controller: controller.searchController,
+                        validator: controller.validateSarch,
                         padding: const EdgeInsets.symmetric(vertical: 20),
                       ),
                       HPElevatedButton(
+                        onPressed: controller.buscarProfessor,
                         child: const Text('Buscar o professor perfeito'),
-                        onPressed: () {},
                       )
                     ],
                   ),
@@ -45,15 +59,15 @@ class InicialView extends StatelessWidget {
                 child: Column(
                   children: [
                     HPElevatedButton(
-                      onPressed: () {},
+                      onPressed: controller.sejaProfessor,
                       style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).primaryColorLight,
                       ),
                       child: const Text('Seja um professor'),
                     ),
                     HPOutlinedButton(
+                      onPressed: controller.consultarAula,
                       child: const Text('Consultar minhas aulas'),
-                      onPressed: () {},
                     )
                   ],
                 ),
