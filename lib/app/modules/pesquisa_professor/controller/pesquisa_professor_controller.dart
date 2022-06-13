@@ -6,6 +6,7 @@ import 'package:hiperprof/routes.dart';
 
 class PesquisaProfessorController extends ChangeNotifier {
   final PesquisaProfessorService _service = PesquisaProfessorService();
+
   final Function(String route, Professor professor) onNavigatorProfessor;
 
   PesquisaProfessorController({required this.onNavigatorProfessor});
