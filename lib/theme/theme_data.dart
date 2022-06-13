@@ -15,6 +15,7 @@ abstract class CustomThemeData {
           fontWeight: FontWeight.bold,
           overflow: TextOverflow.ellipsis,
         ),
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
