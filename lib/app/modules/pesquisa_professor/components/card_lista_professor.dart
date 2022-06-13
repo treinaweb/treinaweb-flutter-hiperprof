@@ -4,7 +4,9 @@ import 'package:hiperprof/data/models/professor_model.dart';
 
 class CardProfessor extends StatelessWidget {
   final Professor professor;
-  const CardProfessor({Key? key, required this.professor}) : super(key: key);
+  final void Function()? onTap;
+  const CardProfessor({Key? key, required this.professor, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +15,9 @@ class CardProfessor extends StatelessWidget {
       child: Column(
         children: [
           GestureDetector(
+            onTap: onTap,
             child: Visibility(
-              visible: false,
+              visible: professor.fotoPerfil != null,
               replacement: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.5,
@@ -31,8 +34,8 @@ class CardProfessor extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.5,
                 decoration: BoxDecoration(
-                  image: const DecorationImage(
-                    image: NetworkImage('https://github.com/treinaweb.png'),
+                  image: DecorationImage(
+                    image: NetworkImage(professor.fotoPerfil ?? ''),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(5),
@@ -43,7 +46,11 @@ class CardProfessor extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const HPTextTitle(text: 'Treinaweb', size: HPSizeTitle.small),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child:
+                    HPTextTitle(text: professor.nome, size: HPSizeTitle.small),
+              ),
               Row(
                 children: [
                   Container(
@@ -55,14 +62,14 @@ class CardProfessor extends StatelessWidget {
                       size: 20,
                     ),
                   ),
-                  const Text(
-                    'R\$ 50,00',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Text(
+                    'R\$ ${professor.valorAula}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],
               ),
-              const Text(
-                'dwa da dw ad wwd daw da dwkm akd awkm damd la, dwa daw dka mdlwam dkam dwam kdma owm oamdo dlá',
+              Text(
+                professor.descricao,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               )

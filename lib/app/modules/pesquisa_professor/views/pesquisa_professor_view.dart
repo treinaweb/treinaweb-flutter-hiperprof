@@ -3,6 +3,7 @@ import 'package:hiperprof/app/components/hp_text_form_search.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/components/card_lista_professor.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/controller/pesquisa_professor_controller.dart';
 import 'package:hiperprof/data/models/professor_model.dart';
+import 'package:hiperprof/routes.dart';
 
 class PesquisaProfessorView extends StatefulWidget {
   final String searchProfessor;
@@ -32,24 +33,32 @@ class _PesquisaProfessorViewState extends State<PesquisaProfessorView> {
                 controller: TextEditingController(),
                 label: 'Pesquisa professor',
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  controller.onSearchDebounce(value);
+                },
               ),
               FutureBuilder<List<Professor>>(
                 future: controller.getAllProfessor(widget.searchProfessor),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    final professores = snapshot.data!;
-                    return SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.72,
-                      child: ListView.builder(
-                        itemCount: professores.length,
-                        itemBuilder: (context, i) {
-                          final professor = professores[i];
-                          return CardProfessor(
-                            professor: professor,
-                          );
-                        },
-                      ),
+                    return AnimatedBuilder(
+                      animation: controller,
+                      builder: (context, child) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.72,
+                          child: ListView.builder(
+                            itemCount: controller.professores.length,
+                            itemBuilder: (context, i) {
+                              final professor = controller.professores[i];
+                              return CardProfessor(
+                                professor: professor,
+                                onTap: () =>
+                                    controller.selectProfessor(professor),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     );
                   } else if (snapshot.hasError) {
                     return Center(
