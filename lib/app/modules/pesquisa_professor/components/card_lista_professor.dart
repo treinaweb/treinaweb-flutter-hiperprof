@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hiperprof/app/components/ht_text_title.dart';
+import 'package:hiperprof/data/models/professor_model.dart';
 
 class CardProfessor extends StatelessWidget {
-  const CardProfessor({Key? key}) : super(key: key);
+  final Professor professor;
+  const CardProfessor({Key? key, required this.professor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -19,9 +19,17 @@ class MyApp extends StatelessWidget {
       theme: CustomThemeData.ligth(),
       darkTheme: CustomThemeData.dark(),
       themeMode: ThemeMode.system,
+      onGenerateRoute: (routeSettings) {
+        if (routeSettings.name == Routes.PESQUISA_PROFESSOR) {
+          final searchProfessor = routeSettings.arguments as String;
+          return MaterialPageRoute(
+              builder: (context) => PesquisaProfessorView(
+                    searchProfessor: searchProfessor,
+                  ));
+        }
+      },
       routes: {
         Routes.INCIAL: (context) => const InicialView(),
-        Routes.PESQUISA_PROFESSOR: (context) => const PesquisaProfessorView(),
       },
     );
   }
