@@ -30,7 +30,7 @@ class _PesquisaProfessorViewState extends State<PesquisaProfessorView> {
           child: Column(
             children: [
               HPTextFormSearch(
-                controller: TextEditingController(),
+                initialValue: widget.searchProfessor,
                 label: 'Pesquisa professor',
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
                 onChanged: (value) {
@@ -52,6 +52,7 @@ class _PesquisaProfessorViewState extends State<PesquisaProfessorView> {
                               final professor = controller.professores[i];
                               return CardProfessor(
                                 professor: professor,
+                                maxLines: 2,
                                 onTap: () =>
                                     controller.selectProfessor(professor),
                               );

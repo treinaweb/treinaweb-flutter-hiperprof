@@ -5,7 +5,9 @@ import 'package:hiperprof/data/models/professor_model.dart';
 class CardProfessor extends StatelessWidget {
   final Professor professor;
   final void Function()? onTap;
-  const CardProfessor({Key? key, required this.professor, required this.onTap})
+  final int? maxLines;
+  const CardProfessor(
+      {Key? key, required this.professor, this.onTap, required this.maxLines})
       : super(key: key);
 
   @override
@@ -70,7 +72,7 @@ class CardProfessor extends StatelessWidget {
               ),
               Text(
                 professor.descricao,
-                maxLines: 2,
+                maxLines: maxLines,
                 overflow: TextOverflow.ellipsis,
               )
             ],
