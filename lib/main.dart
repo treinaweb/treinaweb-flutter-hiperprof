@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hiperprof/app/modules/inicial/views/inicial_view.dart';
-import 'package:hiperprof/app/modules/pesquisa_professor/views/detalhe_professor.dart';
+import 'package:hiperprof/app/modules/pesquisa_professor/views/detalhe_professor_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/pesquisa_professor_view.dart';
 import 'package:hiperprof/routes.dart';
 import 'package:hiperprof/theme/theme_data.dart';
