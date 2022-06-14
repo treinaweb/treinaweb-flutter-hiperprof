@@ -14,9 +14,9 @@ class DetalheProfessorController extends ChangeNotifier {
 
   Future<void> contratar({required int professorId}) async {
     try {
-      final aluno = Aluno(nome: nome, email: email, data: data);
+      final aluno = Aluno(nome: '', email: '', data: '');
 
-      _service.salvarAluno(aluno: aluno, professorId: professorId);
+      await _service.salvarAluno(aluno: aluno, professorId: professorId);
     } catch (e) {}
   }
 }
