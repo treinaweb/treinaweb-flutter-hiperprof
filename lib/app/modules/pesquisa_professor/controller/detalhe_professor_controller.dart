@@ -4,19 +4,44 @@ import 'package:hiperprof/data/models/aluno_model.dart';
 
 class DetalheProfessorController extends ChangeNotifier {
   final Function(DetalheProfessorController) onOpenModalForm;
+  final bool Function() onValidForm;
+  var load = false;
+  var messageErro = '';
+
+  final nomeController = TextEditingController();
+  final emailController = TextEditingController();
+  final dataController = TextEditingController();
+
   final PesquisaProfessorService _service = PesquisaProfessorService();
 
-  DetalheProfessorController({required this.onOpenModalForm});
+  DetalheProfessorController(
+      {required this.onOpenModalForm, required this.onValidForm});
 
   void contratarProfessor() {
     onOpenModalForm(this);
   }
 
   Future<void> contratar({required int professorId}) async {
-    try {
-      final aluno = Aluno(nome: '', email: '', data: '');
+    final isValid = onValidForm();
 
-      await _service.salvarAluno(aluno: aluno, professorId: professorId);
-    } catch (e) {}
+    if (isValid && !load) {
+      load = true;
+      messageErro = '';
+      notifyListeners();
+      try {
+        final aluno = Aluno(
+          nome: nomeController.text,
+          email: emailController.text,
+          data: '',
+        );
+
+        await _service.salvarAluno(aluno: aluno, professorId: professorId);
+      } catch (e) {
+        messageErro = e.toString();
+      } finally {
+        load = false;
+        notifyListeners();
+      }
+    }
   }
 }

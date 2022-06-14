@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hiperprof/app/components/hp_elevated_button.dart';
 import 'package:hiperprof/app/components/hp_text_form_field.dart';
 import 'package:hiperprof/app/components/ht_text_title.dart';
+import 'package:hiperprof/app/mixins/form_validate_mixins.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/components/card_lista_professor.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/controller/detalhe_professor_controller.dart';
 import 'package:hiperprof/data/models/professor_model.dart';
 
-class DetalheProfessorView extends StatelessWidget {
-  const DetalheProfessorView({Key? key}) : super(key: key);
+class DetalheProfessorView extends StatelessWidget with FormValidateMixin {
+  DetalheProfessorView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final key = GlobalKey<FormState>();
     final professor = ModalRoute.of(context)!.settings.arguments as Professor;
     final controller = DetalheProfessorController(
       onOpenModalForm: (controller) {
@@ -25,6 +27,7 @@ class DetalheProfessorView extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 35),
                 child: SingleChildScrollView(
                   child: Form(
+                    key: key,
                     child: Column(
                       children: [
                         const HPTextTitle(
@@ -38,17 +41,20 @@ class DetalheProfessorView extends StatelessWidget {
                           ),
                         ),
                         HPTextFormField(
-                          controller: TextEditingController(),
+                          controller: controller.nomeController,
+                          validator: validateFormRequered,
                           label: 'Seu nome',
                           padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
                         HPTextFormField(
-                          controller: TextEditingController(),
+                          controller: controller.emailController,
+                          validator: validateFormEmail,
                           label: 'Seu Email',
                           padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
                         HPTextFormField(
-                          controller: TextEditingController(),
+                          controller: controller.dataController,
+                          validator: validateFormRequered,
                           label: 'Hora e data da aula',
                           padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
@@ -60,7 +66,7 @@ class DetalheProfessorView extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: Text(
-                                  'ERRO',
+                                  controller.messageErro,
                                   style: TextStyle(
                                     color: Theme.of(context).errorColor,
                                     fontSize: 15,
@@ -74,7 +80,8 @@ class DetalheProfessorView extends StatelessWidget {
                           animation: controller,
                           builder: (context, child) {
                             return HPElevatedButton(
-                              onPressed: () {},
+                              onPressed: () => controller.contratar(
+                                  professorId: professor.id!),
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 50),
                               child: const Visibility(
@@ -96,6 +103,7 @@ class DetalheProfessorView extends StatelessWidget {
           },
         );
       },
+      onValidForm: () => key.currentState?.validate() ?? false,
     );
 
     return Scaffold(

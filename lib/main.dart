@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       },
       routes: {
         Routes.INCIAL: (context) => const InicialView(),
-        Routes.DETALHE_PROFESSOR: (context) => const DetalheProfessorView(),
+        Routes.DETALHE_PROFESSOR: (context) => DetalheProfessorView(),
       },
     );
   }
