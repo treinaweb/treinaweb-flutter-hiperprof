@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hiperprof/app/modules/formulario_professor/view/formulario_professor.dart';
+import 'package:hiperprof/app/modules/formulario_professor/view/formulario_professor_view.dart';
 import 'package:hiperprof/app/modules/inicial/views/inicial_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/detalhe_professor_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/pesquisa_professor_view.dart';

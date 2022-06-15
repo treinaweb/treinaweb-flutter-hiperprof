@@ -38,6 +38,7 @@ dependencies:
   validatorless: ^1.2.1
   intl: ^0.17.0
   get_storage: ^2.0.3
+  flutter_masked_text2: ^0.9.1
 
 dev_dependencies:
   flutter_test:
