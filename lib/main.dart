@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hiperprof/app/modules/formulario_professor/view/formulario_professor.dart';
 import 'package:hiperprof/app/modules/inicial/views/inicial_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/detalhe_professor_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/pesquisa_professor_view.dart';
@@ -27,6 +28,11 @@ class MyApp extends StatelessWidget {
               builder: (context) => PesquisaProfessorView(
                     searchProfessor: searchProfessor,
                   ));
+        }
+
+        if (routeSettings.name == Routes.FORMULARIO_PROFESSOR) {
+          return MaterialPageRoute(
+              builder: (context) => const FormularioProfessorView());
         }
       },
       routes: {

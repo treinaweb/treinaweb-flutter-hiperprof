@@ -15,6 +15,8 @@ class HPTextFormField extends StatelessWidget {
   final Color? fillColor;
   final bool? isDense;
   final String? label;
+  final int? maxLines;
+  final int? hintMaxLines;
   const HPTextFormField({
     Key? key,
     this.padding,
@@ -30,6 +32,8 @@ class HPTextFormField extends StatelessWidget {
     this.fillColor,
     this.isDense,
     this.label,
+    this.maxLines = 1,
+    this.hintMaxLines,
   }) : super(key: key);
 
   @override
@@ -45,7 +49,9 @@ class HPTextFormField extends StatelessWidget {
         initialValue: initialValue,
         onTap: onTap,
         inputFormatters: inputFormatters,
+        maxLines: maxLines,
         decoration: InputDecoration(
+            hintMaxLines: hintMaxLines,
             border: const OutlineInputBorder(),
             suffix: suffix,
             fillColor: fillColor,

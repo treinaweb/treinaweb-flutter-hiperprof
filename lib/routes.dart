@@ -4,4 +4,5 @@ abstract class Routes {
   static const INCIAL = '/';
   static const PESQUISA_PROFESSOR = 'pesquisaProfessor';
   static const DETALHE_PROFESSOR = 'detalheProfessor';
+  static const FORMULARIO_PROFESSOR = 'formularioProfessor';
 }

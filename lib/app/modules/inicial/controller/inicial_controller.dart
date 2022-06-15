@@ -25,6 +25,9 @@ class InicialController {
     }
   }
 
-  void sejaProfessor() {}
+  void sejaProfessor() {
+    onNavigatorProfessor(Routes.FORMULARIO_PROFESSOR, '');
+  }
+
   void consultarAula() {}
 }
