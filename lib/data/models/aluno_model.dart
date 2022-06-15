@@ -14,7 +14,7 @@ class Aluno {
     return {
       'nome': nome,
       'email': email,
-      "data_aluno": data,
+      "data_aula": data,
       'id': id,
     };
   }

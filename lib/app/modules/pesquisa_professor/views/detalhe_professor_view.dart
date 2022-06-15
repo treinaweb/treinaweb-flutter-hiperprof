@@ -15,96 +15,129 @@ class DetalheProfessorView extends StatelessWidget with FormValidateMixin {
     final key = GlobalKey<FormState>();
     final professor = ModalRoute.of(context)!.settings.arguments as Professor;
     final controller = DetalheProfessorController(
-      onOpenModalForm: (controller) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return Dialog(
-              child: Container(
-                height: 400,
-                alignment: Alignment.center,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 35),
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: key,
-                    child: Column(
-                      children: [
-                        const HPTextTitle(
-                            text: 'Preencha suas informações',
-                            size: HPSizeTitle.small),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            'Em breve o professor entratá em contato',
-                            textAlign: TextAlign.center,
+        onOpenModalForm: (controller) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return Dialog(
+                child: Container(
+                  height: 400,
+                  alignment: Alignment.center,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 35),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: key,
+                      child: Column(
+                        children: [
+                          const HPTextTitle(
+                              text: 'Preencha suas informações',
+                              size: HPSizeTitle.small),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              'Em breve o professor entratá em contato',
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                        ),
-                        HPTextFormField(
-                          controller: controller.nomeController,
-                          validator: validateFormRequered,
-                          label: 'Seu nome',
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                        ),
-                        HPTextFormField(
-                          controller: controller.emailController,
-                          validator: validateFormEmail,
-                          label: 'Seu Email',
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                        ),
-                        HPTextFormField(
-                          controller: controller.dataController,
-                          validator: validateFormRequered,
-                          label: 'Hora e data da aula',
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                        ),
-                        AnimatedBuilder(
-                          animation: controller,
-                          builder: (context, child) {
-                            return Visibility(
-                              visible: false,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 20),
-                                child: Text(
-                                  controller.messageErro,
-                                  style: TextStyle(
-                                    color: Theme.of(context).errorColor,
-                                    fontSize: 15,
+                          HPTextFormField(
+                            controller: controller.nomeController,
+                            validator: validateFormRequered,
+                            label: 'Seu nome',
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                          ),
+                          HPTextFormField(
+                            controller: controller.emailController,
+                            validator: validateFormEmail,
+                            label: 'Seu Email',
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                          ),
+                          HPTextFormField(
+                            onTap: controller.selecionarData,
+                            keyboardType: TextInputType.none,
+                            controller: controller.dataController,
+                            validator: validateFormRequered,
+                            label: 'Hora e data da aula',
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                          ),
+                          AnimatedBuilder(
+                            animation: controller,
+                            builder: (context, child) {
+                              return Visibility(
+                                visible: controller.messageErro != '',
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 20),
+                                  child: Text(
+                                    controller.messageErro,
+                                    style: TextStyle(
+                                      color: Theme.of(context).errorColor,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                        AnimatedBuilder(
-                          animation: controller,
-                          builder: (context, child) {
-                            return HPElevatedButton(
-                              onPressed: () => controller.contratar(
-                                  professorId: professor.id!),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 50),
-                              child: const Visibility(
-                                visible: true,
-                                replacement: CircularProgressIndicator(
-                                  color: Colors.white,
+                              );
+                            },
+                          ),
+                          AnimatedBuilder(
+                            animation: controller,
+                            builder: (context, child) {
+                              return HPElevatedButton(
+                                onPressed: () => controller.contratar(
+                                    professorId: professor.id!),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 50),
+                                child: Visibility(
+                                  visible: !controller.load,
+                                  replacement: const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                  child: const Text('Contratar'),
                                 ),
-                                child: Text('Contratar'),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
+              );
+            },
+          );
+        },
+        onValidForm: () => key.currentState?.validate() ?? false,
+        onOpenDatePicker: () async {
+          return await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2019, 1),
+            lastDate: DateTime(2030),
+          );
+        },
+        onOpenTimePicker: () async {
+          return showTimePicker(
+            context: context,
+            initialTime: const TimeOfDay(hour: 0, minute: 0),
+          );
+        },
+        onOpenSnacBar: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text(
+                  'O professor entrará em contato com você em breve'),
+              action: SnackBarAction(
+                label: 'Ok',
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-            );
-          },
-        );
-      },
-      onValidForm: () => key.currentState?.validate() ?? false,
-    );
+              duration: const Duration(seconds: 30),
+            ),
+          );
+        },
+        onNavigatorPop: () {
+          Navigator.pop(context);
+        });
 
     return Scaffold(
       appBar: AppBar(),
