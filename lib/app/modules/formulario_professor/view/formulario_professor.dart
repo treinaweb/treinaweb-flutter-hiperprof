@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hiperprof/app/components/hp_elevated_button.dart';
+import 'package:hiperprof/app/components/hp_text_area.dart';
 import 'package:hiperprof/app/components/hp_text_form_field.dart';
 import 'package:hiperprof/app/components/ht_text_title.dart';
 import 'package:hiperprof/app/mixins/form_validate_mixins.dart';
@@ -69,14 +70,14 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
                     label: 'Confirmar Senha',
                     padding: const EdgeInsets.symmetric(vertical: 10),
                   ),
-                  HPTextFormField(
-                    validator: validateFormRequered,
-                    controller: TextEditingController(),
+                  HPTextArea(
                     label: 'Descrição',
+                    controller: TextEditingController(),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                   HPElevatedButton(
-                    padding: const EdgeInsets.only(top: 50, bottom: 20),
+                    padding: const EdgeInsets.only(
+                        top: 50, bottom: 20, right: 60, left: 60),
                     onPressed: () {},
                     child: const Visibility(
                       replacement: Text('Editar Conta'),

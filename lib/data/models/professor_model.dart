@@ -26,4 +26,15 @@ class Professor {
       id: json['id'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'nome': nome,
+      'idade': idade,
+      'valor_aula': valorAula,
+      'descricao': descricao,
+      'id': id,
+      'foto_perfil': fotoPerfil,
+    };
+  }
 }
