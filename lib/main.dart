@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hiperprof/app/modules/formulario_professor/view/formulario_professor_view.dart';
 import 'package:hiperprof/app/modules/inicial/views/inicial_view.dart';
+import 'package:hiperprof/app/modules/login/views/login_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/detalhe_professor_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/pesquisa_professor_view.dart';
 import 'package:hiperprof/routes.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.INCIAL: (context) => const InicialView(),
         Routes.DETALHE_PROFESSOR: (context) => DetalheProfessorView(),
+        Routes.LOGIN: (context) => const LoginView(),
       },
     );
   }

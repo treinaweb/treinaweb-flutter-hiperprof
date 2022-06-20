@@ -3,7 +3,7 @@ import 'package:hiperprof/routes.dart';
 
 class InicialController {
   final bool Function() isValidForm;
-  final Function(String route, String search) onNavigatorProfessor;
+  final Function(String route, String? search) onNavigatorProfessor;
   final searchController = TextEditingController();
 
   InicialController(
@@ -26,8 +26,10 @@ class InicialController {
   }
 
   void sejaProfessor() {
-    onNavigatorProfessor(Routes.FORMULARIO_PROFESSOR, '');
+    onNavigatorProfessor(Routes.FORMULARIO_PROFESSOR, null);
   }
 
-  void consultarAula() {}
+  void consultarAula() {
+    onNavigatorProfessor(Routes.LOGIN, null);
+  }
 }

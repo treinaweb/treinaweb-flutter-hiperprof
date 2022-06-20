@@ -6,4 +6,5 @@ abstract class Routes {
   static const DETALHE_PROFESSOR = 'detalheProfessor';
   static const FORMULARIO_PROFESSOR = 'formularioProfessor';
   static const HOME_PROFESSOR = 'homeProfessor';
+  static const LOGIN = 'login';
 }

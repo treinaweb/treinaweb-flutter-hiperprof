@@ -37,6 +37,18 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
   );
 
   @override
+  void dispose() {
+    controller.nomeController.dispose();
+    controller.idadeController.dispose();
+    controller.valorAulaController.dispose();
+    controller.emailController.dispose();
+    controller.senhaController.dispose();
+    controller.confirmarSenhaController.dispose();
+    controller.descricaoController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
