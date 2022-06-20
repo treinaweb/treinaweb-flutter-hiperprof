@@ -1,5 +1,5 @@
 import 'package:get_storage/get_storage.dart';
-import 'package:hiperprof/app/modules/formulario_professor/model/response_professor.dart';
+import 'package:hiperprof/data/models/response_professor.dart';
 
 class Storage {
   final _getStorage = GetStorage();

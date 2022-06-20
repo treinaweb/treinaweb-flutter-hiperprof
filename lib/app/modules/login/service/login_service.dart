@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:hiperprof/app/modules/formulario_professor/model/response_professor.dart';
+
 import 'package:hiperprof/app/modules/login/models/login_model.dart';
 import 'package:hiperprof/data/models/professor_model.dart';
+import 'package:hiperprof/data/models/response_professor.dart';
 import 'package:hiperprof/data/repositories/login_repository.dart';
 import 'package:hiperprof/data/storage/auth.dart';
 
