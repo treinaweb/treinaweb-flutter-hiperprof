@@ -20,7 +20,7 @@ class Professor {
       nome: json['nome'],
       descricao: json['descricao'],
       email: json['email'],
-      valorAula: double.parse(json['valor_aula']),
+      valorAula: double.parse(json['valor_aula'].toString()),
       idade: json['idade'],
       fotoPerfil: json['foto_perfil'],
       id: json['id'],

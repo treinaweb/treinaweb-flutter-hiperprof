@@ -21,6 +21,19 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
 
   late final controller = FormularioController(
     isValidForm: () => key.currentState?.validate() ?? false,
+    onOpenSnackbar: (erroMessage) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(erroMessage),
+          action: SnackBarAction(label: 'Ok', onPressed: () {}),
+          duration: const Duration(seconds: 30),
+        ),
+      );
+    },
+    onNavigator: (route, novoProfessor) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, route, arguments: novoProfessor, (route) => false);
+    },
   );
 
   @override
@@ -43,13 +56,13 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
                   ),
                   HPTextFormField(
                     validator: validateFormRequered,
-                    controller: TextEditingController(),
+                    controller: controller.nomeController,
                     label: 'Nome',
                     padding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                   HPTextFormField(
                     validator: validateFormNumber,
-                    controller: TextEditingController(),
+                    controller: controller.idadeController,
                     label: 'Idade',
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -63,37 +76,51 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
                   ),
                   HPTextFormField(
                     validator: validateFormEmail,
-                    controller: TextEditingController(),
+                    controller: controller.emailController,
                     label: 'Email',
                     padding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                   HPTextFormField(
                     validator: controller.validSenha,
                     controller: controller.senhaController,
+                    obscureText: true,
                     label: 'Senha',
                     padding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                   HPTextFormField(
                     validator: controller.validSenha,
                     controller: controller.confirmarSenhaController,
+                    obscureText: true,
                     label: 'Confirmar Senha',
                     padding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                   HPTextArea(
                     label: 'Descrição',
-                    controller: TextEditingController(),
+                    controller: controller.descricaoController,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     validator: validateFormRequered,
                   ),
-                  HPElevatedButton(
-                    padding: const EdgeInsets.only(
-                        top: 50, bottom: 20, right: 60, left: 60),
-                    onPressed: controller.cadastrarConta,
-                    child: const Visibility(
-                      replacement: Text('Editar Conta'),
-                      child: Text('Cadastrar conta'),
-                    ),
-                  )
+                  AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, child) {
+                      return HPElevatedButton(
+                        padding: const EdgeInsets.only(
+                            top: 50, bottom: 20, right: 60, left: 60),
+                        onPressed: controller.cadastrarConta,
+                        child: Visibility(
+                          visible: !controller.load,
+                          replacement: const CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                          child: const Visibility(
+                            visible: true,
+                            replacement: Text('Editar Conta'),
+                            child: Text('Cadastrar conta'),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

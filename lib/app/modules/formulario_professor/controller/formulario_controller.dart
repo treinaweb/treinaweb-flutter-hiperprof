@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:hiperprof/app/modules/formulario_professor/model/cadastro_professor.dart';
 import 'package:hiperprof/app/modules/formulario_professor/service/formulario_service.dart';
+import 'package:hiperprof/data/models/professor_model.dart';
+import 'package:hiperprof/routes.dart';
 
-class FormularioController {
+class FormularioController extends ChangeNotifier {
   final FormularioService _service = FormularioService();
 
   final senhaController = TextEditingController();
@@ -17,12 +19,21 @@ class FormularioController {
       leftSymbol: 'R\$', decimalSeparator: '.', thousandSeparator: ',');
 
   final bool Function() isValidForm;
+  final Function(String) onOpenSnackbar;
+  final Function(String, Professor) onNavigator;
 
-  FormularioController({required this.isValidForm});
+  var load = false;
+
+  FormularioController(
+      {required this.isValidForm,
+      required this.onOpenSnackbar,
+      required this.onNavigator});
 
   Future<void> cadastrarConta() async {
     final isValid = isValidForm();
-    if (isValid) {
+    if (isValid && !load) {
+      load = true;
+      notifyListeners();
       try {
         final professor = CadastroProfessor(
           nome: nomeController.text,
@@ -34,8 +45,14 @@ class FormularioController {
           passwordConfirm: confirmarSenhaController.text,
         );
 
-        _service.cadastrarProfessor(professor);
-      } catch (e) {}
+        final novoProfessor = await _service.cadastrarProfessor(professor);
+        // onNavigator(Routes.HOME_PROFESSOR, novoProfessor);
+      } catch (erro) {
+        onOpenSnackbar(erro.toString());
+      } finally {
+        load = false;
+        notifyListeners();
+      }
     }
   }
 
