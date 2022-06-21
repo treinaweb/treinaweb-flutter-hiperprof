@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hiperprof/data/storage/auth.dart';
 import 'package:hiperprof/routes.dart';
 
 class InicialController {
   final bool Function() isValidForm;
-  final Function(String route, String? search) onNavigatorProfessor;
+  final Function(String route, Object? search) onNavigatorProfessor;
   final searchController = TextEditingController();
 
   InicialController(
@@ -30,6 +31,12 @@ class InicialController {
   }
 
   void consultarAula() {
-    onNavigatorProfessor(Routes.LOGIN, null);
+    final professorResponse = Storage().getToken();
+
+    if (professorResponse != null) {
+      onNavigatorProfessor(Routes.HOME_PROFESSOR, professorResponse.professor);
+    } else {
+      onNavigatorProfessor(Routes.LOGIN, null);
+    }
   }
 }

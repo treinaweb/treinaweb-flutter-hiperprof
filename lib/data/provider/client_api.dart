@@ -13,7 +13,7 @@ class ApiClient implements Rest {
     final header = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Brearer ${responseProfessor?.token}'
+      'Authorization': 'Bearer ${responseProfessor?.token}'
     };
 
     _dio.options.headers = header;

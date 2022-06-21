@@ -10,7 +10,9 @@ class HomeProfessorService {
   Future<List<Aluno>> getAlunos() async {
     try {
       final response = await _alunoRepository.getAlunos();
-      return response.data.map((json) => Aluno.fromJson(json)).toList();
+      return (response.data as List)
+          .map((json) => Aluno.fromJson(json))
+          .toList();
     } on DioError catch (erro, s) {
       log('ERRO AO BUSCAR ALUNOS', error: erro, stackTrace: s);
 

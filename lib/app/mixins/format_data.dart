@@ -43,8 +43,8 @@ mixin FormatData {
   }
 
   String formatarDataStringParaBr(String data) {
-    final formatter = DateFormat('yyyy/MM/dd HH:mm:ss').parse(data);
+    final dataConvertido = DateFormat('yyyy-MM-dd HH:mm:ss').parse(data);
 
-    return data;
+    return _formatarDataBr(dataConvertido);
   }
 }

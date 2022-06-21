@@ -80,7 +80,7 @@ class HomeProfessorView extends StatelessWidget {
                                       ListTile(
                                         dense: true,
                                         title: Text(item.data),
-                                        leading: const Icon(Icons.email),
+                                        leading: const Icon(Icons.school),
                                       )
                                     ],
                                   )
