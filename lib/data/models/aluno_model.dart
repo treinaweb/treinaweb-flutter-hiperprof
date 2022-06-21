@@ -10,6 +10,15 @@ class Aluno {
     this.id,
   });
 
+  factory Aluno.fromJson(Map<String, dynamic> json) {
+    return Aluno(
+      nome: json['nome'],
+      email: json['email'],
+      data: json['data_aula'],
+      id: json['id'],
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'nome': nome,

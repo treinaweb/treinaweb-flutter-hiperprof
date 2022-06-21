@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:dio/src/response.dart';
 import 'package:hiperprof/data/provider/rest_interface.dart';
+import 'package:hiperprof/data/storage/auth.dart';
 
 class ApiClient implements Rest {
   final Dio _dio = Dio();
@@ -9,9 +9,11 @@ class ApiClient implements Rest {
   ApiClient() {
     _dio.options.baseUrl = _baseUrl;
     _dio.options.sendTimeout = 15000;
+    final responseProfessor = Storage().getToken();
     final header = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Authorization': 'Brearer ${responseProfessor?.token}'
     };
 
     _dio.options.headers = header;
@@ -28,7 +30,10 @@ class ApiClient implements Rest {
   }
 
   @override
-  Future<Response<T>> post<T>(String path, {required data}) async {
+  Future<Response<T>> post<T>(
+    String path, {
+    required data,
+  }) async {
     return await _dio.post(path, data: data);
   }
 
