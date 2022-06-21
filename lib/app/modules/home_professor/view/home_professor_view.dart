@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hiperprof/app/components/ht_text_title.dart';
+import 'package:hiperprof/app/modules/home_professor/controller/home_professor_controller.dart';
+import 'package:hiperprof/data/models/aluno_model.dart';
 
 class HomeProfessorView extends StatelessWidget {
   const HomeProfessorView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = HomeProfessorController();
     return Scaffold(
       appBar: AppBar(),
       endDrawer: Drawer(
         child: ListView(
           children: [
             ListTile(
-              onTap: () {},
+              onTap: controller.editarProfessor,
               title: const Text('Editar'),
               leading: const Icon(Icons.edit),
             ),
             ListTile(
-              onTap: () {},
+              onTap: controller.logout,
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
             ),
             ListTile(
-              onTap: () {},
+              onTap: controller.acessarPaginaPrincipal,
               title: const Text('Página principal'),
               leading: const Icon(Icons.home),
             ),
@@ -39,15 +40,54 @@ class HomeProfessorView extends StatelessWidget {
                 text: 'Lista de aulas',
                 size: HPSizeTitle.normal,
               ),
-              FutureBuilder(
-                future: null,
+              FutureBuilder<List<Aluno>>(
+                future: controller.getAllAlunos(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    if (snapshot.data!.isEmpty) {
+                      return const Center(
+                        child: Text('Nenhuma aula disposnivel'),
+                      );
+                    }
                     return AnimatedBuilder(
-                      animation: ValueNotifier(''),
+                      animation: controller,
                       builder: (context, child) {
-                        return const ExpansionPanelList(
-                          children: [],
+                        return ExpansionPanelList(
+                          expansionCallback: controller.expansionCallback,
+                          children:
+                              controller.itens.map<ExpansionPanel>((item) {
+                            return ExpansionPanel(
+                              isExpanded: item.isExpanded,
+                              headerBuilder: (context, isExpanded) {
+                                return ListTile(
+                                  title: Text(item.nome),
+                                  leading: const Icon(Icons.person),
+                                );
+                              },
+                              body: Table(
+                                children: [
+                                  TableRow(
+                                    children: [
+                                      ListTile(
+                                        dense: true,
+                                        title: Text(item.email),
+                                        leading: const Icon(Icons.email),
+                                      )
+                                    ],
+                                  ),
+                                  TableRow(
+                                    children: [
+                                      ListTile(
+                                        dense: true,
+                                        title: Text(item.data),
+                                        leading: const Icon(Icons.email),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            );
+                          }).toList(),
                         );
                       },
                     );

@@ -5,6 +5,7 @@ class Storage {
   final _getStorage = GetStorage();
 
   Future<void> saveToken(ResponseProfessor responseProfessor) async {
+    final data = responseProfessor.toJson();
     await _getStorage.write('auth', responseProfessor.toJson());
   }
 

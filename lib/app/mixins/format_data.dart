@@ -41,4 +41,10 @@ mixin FormatData {
 
     return _formatarDataIso(data);
   }
+
+  String formatarDataStringParaBr(String data) {
+    final formatter = DateFormat('yyyy/MM/dd HH:mm:ss').parse(data);
+
+    return data;
+  }
 }

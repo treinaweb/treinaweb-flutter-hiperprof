@@ -34,6 +34,7 @@ class Professor {
       'valor_aula': valorAula,
       'descricao': descricao,
       'id': id,
+      'email': email,
       'foto_perfil': fotoPerfil,
     };
   }
