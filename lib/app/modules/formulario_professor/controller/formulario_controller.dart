@@ -21,13 +21,16 @@ class FormularioController extends ChangeNotifier {
   final bool Function() isValidForm;
   final Function(String) onOpenSnackbar;
   final Function(String, Professor) onNavigator;
+  final void Function(FormularioController) openDialog;
 
   var load = false;
 
-  FormularioController(
-      {required this.isValidForm,
-      required this.onOpenSnackbar,
-      required this.onNavigator});
+  FormularioController({
+    required this.isValidForm,
+    required this.onOpenSnackbar,
+    required this.onNavigator,
+    required this.openDialog,
+  });
 
   Future<void> cadastrarConta() async {
     final isValid = isValidForm();
@@ -46,7 +49,7 @@ class FormularioController extends ChangeNotifier {
         );
 
         final novoProfessor = await _service.cadastrarProfessor(professor);
-        // onNavigator(Routes.HOME_PROFESSOR, novoProfessor);
+        onNavigator(Routes.HOME_PROFESSOR, novoProfessor);
       } catch (erro) {
         onOpenSnackbar(erro.toString());
       } finally {
@@ -80,5 +83,9 @@ class FormularioController extends ChangeNotifier {
       emailController.text = professor.email;
       descricaoController.text = professor.descricao;
     }
+  }
+
+  void openModal() {
+    openDialog(this);
   }
 }

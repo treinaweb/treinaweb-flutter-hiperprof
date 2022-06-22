@@ -39,6 +39,53 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
       Navigator.pushNamedAndRemoveUntil(
           context, route, arguments: novoProfessor, (route) => false);
     },
+    openDialog: (controller) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              height: 210,
+              margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+              child: Column(
+                children: [
+                  const HPTextTitle(
+                    text: 'Tem certeza que deseja apagar sua conta ?',
+                    size: HPSizeTitle.small,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    'Ao apagar sua conta, também será excluido todo o histórico de alunos ',
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Não apagar'),
+                        ),
+                        const Spacer(),
+                        OutlinedButton(
+                          style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all(
+                                Theme.of(context).errorColor),
+                          ),
+                          child: const Text('Apagar'),
+                          onPressed: () {},
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    },
   );
 
   @override
@@ -181,12 +228,12 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
                           size: HPSizeTitle.small,
                         ),
                         HPOutlinedButton(
+                          onPressed: controller.openModal,
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all(
                                   Theme.of(context).errorColor)),
                           child: const Text('Apagar minha conta'),
-                          onPressed: () {},
                         )
                       ],
                     ),
