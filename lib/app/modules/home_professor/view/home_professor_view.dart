@@ -8,7 +8,17 @@ class HomeProfessorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = HomeProfessorController();
+    final controller =
+        HomeProfessorController(onNavigatePaginaInicial: (route) {
+      Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
+    }, openSnackbar: (msg) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(msg),
+          action: SnackBarAction(label: 'Ok', onPressed: () {}),
+        ),
+      );
+    });
     return Scaffold(
       appBar: AppBar(),
       endDrawer: Drawer(

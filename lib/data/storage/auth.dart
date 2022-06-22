@@ -17,4 +17,8 @@ class Storage {
     }
     return null;
   }
+
+  void clearToken() {
+    _getStorage.remove('auth');
+  }
 }
