@@ -115,11 +115,11 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
       floatingActionButton: Visibility(
         visible: widget.professor != null,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: controller.openCam,
           shape: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(50),
           ),
-          child: FotoFloatActionButton(img: widget.professor?.fotoPerfil),
+          child: FotoFloatActionButton(img: controller.image),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,

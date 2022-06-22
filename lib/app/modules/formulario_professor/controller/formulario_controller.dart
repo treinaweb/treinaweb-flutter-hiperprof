@@ -4,9 +4,11 @@ import 'package:hiperprof/app/modules/formulario_professor/model/cadastro_profes
 import 'package:hiperprof/app/modules/formulario_professor/service/formulario_service.dart';
 import 'package:hiperprof/data/models/professor_model.dart';
 import 'package:hiperprof/routes.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FormularioController extends ChangeNotifier {
   final FormularioService _service = FormularioService();
+  final ImagePicker _imagePicker = ImagePicker();
 
   final senhaController = TextEditingController();
   final confirmarSenhaController = TextEditingController();
@@ -22,6 +24,8 @@ class FormularioController extends ChangeNotifier {
   final Function(String) onOpenSnackbar;
   final Function(String, Professor) onNavigator;
   final void Function(FormularioController) openDialog;
+
+  String? image;
 
   var load = false;
 
@@ -59,6 +63,20 @@ class FormularioController extends ChangeNotifier {
     }
   }
 
+  Future<void> openCam() async {
+    final XFile? xFile = await _imagePicker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 500,
+      maxWidth: 500,
+      imageQuality: 30,
+    );
+    if (xFile != null) {
+      try {
+        // salvar img na api
+      } catch (e) {}
+    }
+  }
+
   String? validSenha(String? value) {
     if (value?.isEmpty ?? false) {
       return 'Campos obrigatórios';
@@ -82,6 +100,7 @@ class FormularioController extends ChangeNotifier {
       valorAulaController.updateValue(professor.valorAula);
       emailController.text = professor.email;
       descricaoController.text = professor.descricao;
+      image = professor.fotoPerfil;
     }
   }
 
