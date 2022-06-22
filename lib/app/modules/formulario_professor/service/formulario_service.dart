@@ -43,7 +43,13 @@ class FormularioService {
         professorId: professorId,
       );
 
-      return Professor.fromJson(response.data).fotoPerfil!;
+      final professorEditado = Professor.fromJson(response.data);
+
+      final token = _storage.getToken()!.token;
+      _storage.saveToken(
+          ResponseProfessor(professor: professorEditado, token: token));
+
+      return professorEditado.fotoPerfil!;
     } on DioError catch (erro, s) {
       log('Erro ao salvar foto', error: erro, stackTrace: s);
 

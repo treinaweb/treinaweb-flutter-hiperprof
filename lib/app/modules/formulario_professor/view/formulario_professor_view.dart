@@ -73,8 +73,8 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
                             foregroundColor: MaterialStateProperty.all(
                                 Theme.of(context).errorColor),
                           ),
+                          onPressed: controller.apagarConta,
                           child: const Text('Apagar'),
-                          onPressed: () {},
                         )
                       ],
                     ),
@@ -191,7 +191,7 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
                       return HPElevatedButton(
                         padding: const EdgeInsets.only(
                             top: 50, bottom: 20, right: 60, left: 60),
-                        onPressed: controller.cadastrarConta,
+                        onPressed: controller.salvarConta,
                         child: Visibility(
                           visible: !controller.load,
                           replacement: const CircularProgressIndicator(

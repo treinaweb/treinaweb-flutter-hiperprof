@@ -22,7 +22,7 @@ class FormularioController extends ChangeNotifier {
 
   final bool Function() isValidForm;
   final Function(String) onOpenSnackbar;
-  final Function(String, Professor) onNavigator;
+  final Function(String, Professor?) onNavigator;
   final void Function(FormularioController) openDialog;
 
   String? image;
@@ -36,7 +36,7 @@ class FormularioController extends ChangeNotifier {
     required this.openDialog,
   });
 
-  Future<void> cadastrarConta() async {
+  Future<void> salvarConta() async {
     final isValid = isValidForm();
     if (isValid && !load) {
       load = true;
@@ -50,9 +50,17 @@ class FormularioController extends ChangeNotifier {
           idade: int.parse(idadeController.text),
           password: senhaController.text,
           passwordConfirm: confirmarSenhaController.text,
+          fotoPerfil: _professor?.fotoPerfil,
+          id: _professor?.id,
         );
+        final Professor novoProfessor;
 
-        final novoProfessor = await _service.cadastrarProfessor(professor);
+        if (_professor?.id != null) {
+          novoProfessor = await _service.editarProfessor(professor);
+        } else {
+          novoProfessor = await _service.cadastrarProfessor(professor);
+        }
+
         onNavigator(Routes.HOME_PROFESSOR, novoProfessor);
       } catch (erro) {
         onOpenSnackbar(erro.toString());
@@ -121,5 +129,21 @@ class FormularioController extends ChangeNotifier {
 
   void openModal() {
     openDialog(this);
+  }
+
+  Future<void> apagarConta() async {
+    if (!load) {
+      try {
+        load = true;
+        notifyListeners();
+        await _service.deletarProfessor();
+        onNavigator(Routes.INCIAL, null);
+      } catch (e) {
+        onOpenSnackbar(e.toString());
+      } finally {
+        load = false;
+        notifyListeners();
+      }
+    }
   }
 }
