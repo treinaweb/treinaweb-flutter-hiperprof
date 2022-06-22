@@ -11,11 +11,16 @@ class HomeProfessorController extends ChangeNotifier with FormatData {
 
   final void Function(String) onNavigatePaginaInicial;
   final void Function(String) openSnackbar;
+  final void Function(String) onNavigateEditar;
 
   HomeProfessorController(
-      {required this.onNavigatePaginaInicial, required this.openSnackbar});
+      {required this.onNavigatePaginaInicial,
+      required this.openSnackbar,
+      required this.onNavigateEditar});
 
-  void editarProfessor() {}
+  void editarProfessor() {
+    onNavigateEditar(Routes.FORMULARIO_PROFESSOR);
+  }
 
   void acessarPaginaPrincipal() {
     onNavigatePaginaInicial(Routes.INCIAL);

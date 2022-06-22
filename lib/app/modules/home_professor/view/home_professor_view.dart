@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hiperprof/app/components/ht_text_title.dart';
 import 'package:hiperprof/app/modules/home_professor/controller/home_professor_controller.dart';
 import 'package:hiperprof/data/models/aluno_model.dart';
+import 'package:hiperprof/data/models/professor_model.dart';
 
 class HomeProfessorView extends StatelessWidget {
   const HomeProfessorView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final professor = ModalRoute.of(context)!.settings.arguments as Professor;
     final controller =
         HomeProfessorController(onNavigatePaginaInicial: (route) {
       Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
@@ -18,6 +20,8 @@ class HomeProfessorView extends StatelessWidget {
           action: SnackBarAction(label: 'Ok', onPressed: () {}),
         ),
       );
+    }, onNavigateEditar: (route) {
+      Navigator.pushNamed(context, route, arguments: professor);
     });
     return Scaffold(
       appBar: AppBar(),

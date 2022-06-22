@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hiperprof/app/components/hp_elevated_button.dart';
+import 'package:hiperprof/app/components/hp_outlined_button.dart';
 import 'package:hiperprof/app/components/hp_text_area.dart';
 import 'package:hiperprof/app/components/hp_text_form_field.dart';
 import 'package:hiperprof/app/components/ht_text_title.dart';
 import 'package:hiperprof/app/mixins/form_validate_mixins.dart';
+import 'package:hiperprof/app/modules/formulario_professor/components/foto_floatactionbutton.dart';
 import 'package:hiperprof/app/modules/formulario_professor/controller/formulario_controller.dart';
+import 'package:hiperprof/data/models/professor_model.dart';
 
 class FormularioProfessorView extends StatefulWidget {
-  const FormularioProfessorView({Key? key}) : super(key: key);
+  final Professor? professor;
+  const FormularioProfessorView({Key? key, required this.professor})
+      : super(key: key);
 
   @override
   State<FormularioProfessorView> createState() =>
@@ -49,11 +54,28 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
   }
 
   @override
+  void initState() {
+    controller.inicialProfessor(widget.professor);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 3,
       ),
+      floatingActionButton: Visibility(
+        visible: widget.professor != null,
+        child: FloatingActionButton(
+          onPressed: () {},
+          shape: UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: FotoFloatActionButton(img: widget.professor?.fotoPerfil),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
       body: ListView(
         children: [
           Padding(
@@ -133,6 +155,42 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
                       );
                     },
                   ),
+                ],
+              ),
+            ),
+          ),
+          Visibility(
+            visible: widget.professor != null,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Divider(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      children: [
+                        const HPTextTitle(
+                          text:
+                              'Você pode apagar sua conta, desse modo não será mais exibido na plataforma',
+                          size: HPSizeTitle.small,
+                        ),
+                        HPOutlinedButton(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all(
+                                  Theme.of(context).errorColor)),
+                          child: const Text('Apagar minha conta'),
+                          onPressed: () {},
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

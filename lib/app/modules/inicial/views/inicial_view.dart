@@ -17,8 +17,8 @@ class _InicialViewState extends State<InicialView> {
   late final _mediaQuery = MediaQuery.of(context);
   late final controller = InicialController(
     isValidForm: () => _key.currentState?.validate() ?? false,
-    onNavigatorProfessor: (route, search) =>
-        Navigator.pushNamed(context, route, arguments: search),
+    onNavigatorProfessor: (route, obj) =>
+        Navigator.pushNamed(context, route, arguments: obj),
   );
 
   @override

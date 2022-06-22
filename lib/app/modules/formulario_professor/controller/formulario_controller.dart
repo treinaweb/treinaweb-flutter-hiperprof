@@ -71,4 +71,14 @@ class FormularioController extends ChangeNotifier {
 
     return null;
   }
+
+  void inicialProfessor(Professor? professor) {
+    if (professor != null) {
+      nomeController.text = professor.nome;
+      idadeController.text = professor.idade.toString();
+      valorAulaController.updateValue(professor.valorAula);
+      emailController.text = professor.email;
+      descricaoController.text = professor.descricao;
+    }
+  }
 }

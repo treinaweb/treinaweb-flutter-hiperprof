@@ -6,6 +6,7 @@ import 'package:hiperprof/app/modules/inicial/views/inicial_view.dart';
 import 'package:hiperprof/app/modules/login/views/login_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/detalhe_professor_view.dart';
 import 'package:hiperprof/app/modules/pesquisa_professor/views/pesquisa_professor_view.dart';
+import 'package:hiperprof/data/models/professor_model.dart';
 import 'package:hiperprof/routes.dart';
 import 'package:hiperprof/theme/theme_data.dart';
 
@@ -35,8 +36,11 @@ class MyApp extends StatelessWidget {
         }
 
         if (routeSettings.name == Routes.FORMULARIO_PROFESSOR) {
+          final professor = routeSettings.arguments as Professor?;
           return MaterialPageRoute(
-              builder: (context) => const FormularioProfessorView());
+              builder: (context) => FormularioProfessorView(
+                    professor: professor,
+                  ));
         }
       },
       routes: {

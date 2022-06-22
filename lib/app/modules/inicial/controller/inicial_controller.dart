@@ -34,7 +34,7 @@ class InicialController {
     final professorResponse = Storage().getToken();
 
     if (professorResponse != null) {
-      onNavigatorProfessor(Routes.HOME_PROFESSOR, professorResponse.professor);
+      onNavigatorProfessor(Routes.HOME_PROFESSOR, professorResponse.professor!);
     } else {
       onNavigatorProfessor(Routes.LOGIN, null);
     }
