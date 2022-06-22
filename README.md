@@ -1,3 +1,357 @@
+# Projeto pratico: Superprof
+
+<p align="center">
+  <img src="https://github.com/treinaweb.png" width="200">
+</p>
+
+
+<p align="center">
+    Superprof by <a href="https://github.com/treinaweb">TreinaWeb</a>
+</p>
+
+## índice
+- [Descrição](#descrição)
+- [Layout da aplicação](#layout-da-aplicação)
+- [Documentacao Api](#documentacao-Api)
+- [Commit por aula](#commit-por-aula)
+
+## Descrição
+
+A aplicação a ser desenvolvida deve permitir que pessoas encontrem professores para se candidatar
+a uma aula de maneira fácil, além de facilitar a vida de novos professores com um cadastro simples e
+para receber as candidaturas dos alunos.
+
+## Layout da aplicação
+
+Abaixo está o link para acessar o [wireframes](https://pt.wikipedia.org/wiki/Website_wireframe) 
+
+- [Wireframes](https://whimsical.com/superprof-WAk9kQhU2Zk85AGPq5seDK)
+
+## Documentacao Api
+
+Abaixo você encontrará todas as informações do quê e como deve ser desenvolvido no front-end.
+
+### Rotas
+
+| Rota                      | Verbo HTTP | Descrição                                                                     |
+|---------------------------|------------|-------------------------------------------------------------------------------|
+| /api/auth/login           | POST       | Rota responsável por fazer login                                              |
+| /api/professores          | POST       | Rota responsável para cadastrar um novo professor                             |
+| /api/professores/1/alunos | POST       | Rota responsável por vincular aluno ao professor                              |
+| /professores/15/foto      | POST       | Rota responsável para cadastrar foto do professor                             |
+| /api/professores          | PUT        | Rota responsável por atualizar um professor                                   |
+| /api/professores          | GET        | Rota responsável por pegar todos os professores cadastrado                    |
+| /api/professores/1        | GET        | Rota responsável por pegar um profesor especifico                             |
+| /api/professores/alunos   | GET        | Rota responsável por pegar todos os alunos do professor                       |
+| /api/professores          | GET        | Rota responsável por filtrar professores                                      |
+| /api/professores          | DELETE     | Rota responsável deletar professor                                            |
+
+### Rota POST /api/auth/login
+
+**Dados no corpo da requisição**
+
+| Campo       | Tipo    | Exemplo       |
+|-------------|---------|---------------|
+| email       | string  | joao@mail.com |
+| password    | string  | senha@123     |
+| dispositivo | string  | androidId     |
+
+Regras de validação:
+
+- `email`: não pode ser nulo
+- `email`: não pode ser vazio
+- `email`: não pode ser menor que 3 caracteres
+- `email`: não pode ser maior que 255 caracteres
+- `email`: deve ser um `email` válido
+- `password`: não pode ser nulo
+- `password`: não pode ser vazio
+- `password`: deve ser igual a senha cadastrada para o usuário encontrado
+- `dispositivo`: nao deve ser nulo
+- `dispositivo`: nao deve ser vazio
+
+**Exemplo de requisição**
+
+```
+Content-Type: application/json
+Accept : application/json
+
+{
+  "email": "joao@mail.com",
+  "password": "senha@123",
+  "dispositivo": "androdiId"
+}
+```
+
+### Rota POST /api/professores
+
+
+**Dados no corpo da requisição**
+
+Dados do local:
+
+| Campo                | Tipo    | Exemplo            |
+|----------------------|---------|--------------------|
+| nome                 | string  | Ariel Sardinha     |
+| idade                | int     | 29                 |
+| valorAula            | double  | 50.5               |
+| descricao            | string  | -                  |
+| email                | string  | 29                 |
+| password             | string  | 50.0               |
+| passowrdConfirmacao  | string  | 50.0               |
+
+Regras de validação do local:
+
+- `nome`: não pode ser nulo
+- `nome`: não pode ser vazio
+- `email`: não pode ser nulo
+- `email`: não pode ser vazio
+- `email`: deve ser um `email` válido
+- `password`: não pode ser nulo
+- `password`: não pode ser vazio
+- `password`: não pode ser menor que 6 caracteres
+- `passowrdConfirmacao`: não pode ser nulo
+- `passowrdConfirmacao`: não pode ser vazio
+- `passowrdConfirmacao`: não pode ser menor que 6 caracteres
+- `passowrdConfirmacao e password`: devem ser identicos
+
+**Exemplo de requisição**
+
+```
+Content-Type: application/json
+Accept : application/json
+
+{
+	"nome": "Ariel",
+	"idade": 30,
+	"valor_aula": 70.00,
+	"descricao": "",
+	"email": "admin@admin.com",
+	"password": "123456",
+	"password_confirmation": "123456"
+}
+```
+
+
+### Rota POST /api/professores/professorId/alunos
+
+
+**Dados no corpo da requisição**
+
+Dados do local:
+
+| Campo     | Tipo    | Exemplo                            |
+|-----------|---------|------------------------------------|
+| nome      | string  | Ariel Sardinha                     |
+| email     | string  | ariel@treinaweb.com                |
+| dataAula  | string  | 2022-09-10 10:00:00                |
+
+Regras de validação do local:
+
+- `nome`: não pode ser nulo
+- `nome`: não pode ser vazio
+- `email`: não pode ser nulo
+- `email`: não pode ser vazio
+- `email`: deve ser um `email` válido
+- `dataAula`: deve ser no formato americano
+- 
+**Exemplo de requisição**
+
+```
+Content-Type: application/json
+Accept : application/json
+
+{
+	"nome": "joao",
+	"email": "asd@asd.com",
+	"data_aula": "2022-09-10 10:00:00"
+}
+```
+
+### Rota PUT /api/professores
+
+**Dados no corpo da requisição**
+
+Dados do local:
+
+| Campo                | Tipo    | Exemplo            |
+|----------------------|---------|--------------------|
+| nome                 | string  | Ariel Sardinha     |
+| idade                | int     | 29                 |
+| valorAula            | double  | 50.5               |
+| descricao            | string  | -                  |
+| email                | string  | 29                 |
+| password             | string  | 50.0               |
+| passowrdConfirmacao  | string  | 50.0               |
+
+Regras de validação do local:
+
+- `nome`: não pode ser nulo
+- `nome`: não pode ser vazio
+- `email`: não pode ser nulo
+- `email`: não pode ser vazio
+- `email`: deve ser um `email` válido
+- `password`: não pode ser nulo
+- `password`: não pode ser vazio
+- `password`: não pode ser menor que 6 caracteres
+- `passowrdConfirmacao`: não pode ser nulo
+- `passowrdConfirmacao`: não pode ser vazio
+- `passowrdConfirmacao`: não pode ser menor que 6 caracteres
+- `passowrdConfirmacao e password`: devem ser identicos
+
+**Exemplo de requisição**
+
+```
+Content-Type: application/json
+Accept : application/json
+Authorization : Bearer token
+
+{
+	"nome": "Ariel",
+	"idade": 30,
+	"valor_aula": 70.00,
+	"descricao": "",
+	"email": "admin@admin.com",
+	"password": "123456",
+	"password_confirmation": "123456"
+}
+```
+
+### Rota GET /api/professores
+
+
+**Exemplo de requisição**
+
+```
+Content-Type: application/json
+Accept : application/json
+
+[
+	{
+		"id": 1,
+		"nome": "aa",
+		"idade": 30,
+		"valor_aula": "70.00",
+		"descricao": "asd",
+		"email": "asd",
+		"created_at": "2022-05-26T20:51:50.000000Z",
+		"updated_at": "2022-05-26T20:51:50.000000Z",
+		"foto_perfil": null
+	},
+	{
+		"id": 15,
+		"nome": "Ariel",
+		"idade": 30,
+		"valor_aula": "45.00",
+		"descricao": "admin aula de programacao",
+		"email": "admin@admin.com",
+		"created_at": "2022-05-30T11:30:44.000000Z",
+		"updated_at": "2022-05-30T22:00:32.000000Z",
+		"foto_perfil": "https:\/\/ediaristas-php.s3.sa-east-1.amazonaws.com\/public\/professores\/OSbPP8c8yRH32BfZKtLnUuOOdz8HEMkt1Zg4sWBY.jpg"
+	}
+]
+```
+
+### Rota GET /api/professores/1
+
+
+**Exemplo de requisição**
+
+```
+Content-Type: application/json
+Accept : application/json
+Authorization : Bearer token
+
+{
+	"id": 1,
+	"nome": "aa",
+	"idade": 30,
+	"valor_aula": "70.00",
+	"descricao": "asd",
+	"email": "asd",
+	"created_at": "2022-05-26T20:51:50.000000Z",
+	"updated_at": "2022-05-26T20:51:50.000000Z",
+	"foto_perfil": null
+},
+```
+
+### Rota GET /api/professores/alunos
+
+**Exemplo de requisição**
+
+```
+Content-Type: application/json
+Accept : application/json
+Authorization : Bearer token
+
+[
+  {
+    "nome": "Ariel Sardinha",
+    "email": "ariel@treinaweb.com",
+    "hora": "00:00:15",
+    "id": 1,
+  }
+  {
+    "nome": "Ariel Sardinha",
+    "email": "ariel@treinaweb.com",
+    "hora": "00:00:15",
+    "id": 2,
+  }
+]
+```
+
+
+### Rota GET /api/professores?q=`valor`
+
+
+**Exemplo de requisição**
+
+```
+Content-Type: application/json
+Accept : application/json
+
+[
+	{
+		"id": 1,
+		"nome": "aa",
+		"idade": 30,
+		"valor_aula": "70.00",
+		"descricao": "asd",
+		"email": "valor maior",
+		"created_at": "2022-05-26T20:51:50.000000Z",
+		"updated_at": "2022-05-26T20:51:50.000000Z",
+		"foto_perfil": null
+	},
+	{
+		"id": 15,
+		"nome": "Ariel",
+		"idade": 30,
+		"valor_aula": "45.00",
+		"descricao": "admin aula de programacao valor",
+		"email": "admin@admin.com",
+		"created_at": "2022-05-30T11:30:44.000000Z",
+		"updated_at": "2022-05-30T22:00:32.000000Z",
+		"foto_perfil": "https:\/\/ediaristas-php.s3.sa-east-1.amazonaws.com\/public\/professores\/OSbPP8c8yRH32BfZKtLnUuOOdz8HEMkt1Zg4sWBY.jpg"
+	}
+]
+```
+
+### Rota GET /professores/15/foto
+
+**Exemplo de requisição**
+
+```
+Content-Type: multipart/form-data
+Accept : application/json
+Authorization : Bearer token
+
+{
+    "foto": "foto.png",
+}
+```
+
+
+## Commit por aula
+
 Vídeo | Aula | Commit | Link
 ------ | ------ | ------ | ------
 Vídeo 02 | Aula 01 - criando projeto | 08:02 - criando projeto | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/c7349b62921122e94fe7460c32a86d139ce99f9e.zip)
