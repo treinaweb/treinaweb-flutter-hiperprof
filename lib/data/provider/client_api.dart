@@ -33,8 +33,10 @@ class ApiClient implements Rest {
   Future<Response<T>> post<T>(
     String path, {
     required data,
+    Map<String, dynamic>? headers,
   }) async {
-    return await _dio.post(path, data: data);
+    return await _dio.post(path,
+        data: data, options: Options(headers: headers));
   }
 
   @override

@@ -26,7 +26,7 @@ class FormularioController extends ChangeNotifier {
   final void Function(FormularioController) openDialog;
 
   String? image;
-
+  Professor? _professor;
   var load = false;
 
   FormularioController({
@@ -64,16 +64,30 @@ class FormularioController extends ChangeNotifier {
   }
 
   Future<void> openCam() async {
-    final XFile? xFile = await _imagePicker.pickImage(
-      source: ImageSource.camera,
-      maxHeight: 500,
-      maxWidth: 500,
-      imageQuality: 30,
-    );
-    if (xFile != null) {
-      try {
-        // salvar img na api
-      } catch (e) {}
+    if (!load) {
+      final XFile? xFile = await _imagePicker.pickImage(
+        source: ImageSource.camera,
+        maxHeight: 500,
+        maxWidth: 500,
+        imageQuality: 30,
+      );
+      if (xFile != null) {
+        try {
+          load = true;
+          notifyListeners();
+          final novoImagem = await _service.salvarImagemProfessor(
+            path: xFile,
+            professorId: _professor!.id!,
+          );
+
+          image = novoImagem;
+        } catch (e) {
+          onOpenSnackbar(e.toString());
+        } finally {
+          load = false;
+          notifyListeners();
+        }
+      }
     }
   }
 
@@ -95,6 +109,7 @@ class FormularioController extends ChangeNotifier {
 
   void inicialProfessor(Professor? professor) {
     if (professor != null) {
+      _professor = professor;
       nomeController.text = professor.nome;
       idadeController.text = professor.idade.toString();
       valorAulaController.updateValue(professor.valorAula);

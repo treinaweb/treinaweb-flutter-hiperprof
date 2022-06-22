@@ -119,7 +119,11 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
           shape: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(50),
           ),
-          child: FotoFloatActionButton(img: controller.image),
+          child: AnimatedBuilder(
+              animation: controller,
+              builder: (context, snapshot) {
+                return FotoFloatActionButton(img: controller.image);
+              }),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
@@ -193,10 +197,10 @@ class _FormularioProfessorViewState extends State<FormularioProfessorView>
                           replacement: const CircularProgressIndicator(
                             color: Colors.white,
                           ),
-                          child: const Visibility(
-                            visible: true,
-                            replacement: Text('Editar Conta'),
-                            child: Text('Cadastrar conta'),
+                          child: Visibility(
+                            visible: widget.professor == null,
+                            replacement: const Text('Editar Conta'),
+                            child: const Text('Cadastrar conta'),
                           ),
                         ),
                       );
