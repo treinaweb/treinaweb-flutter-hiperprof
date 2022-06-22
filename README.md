@@ -1,10 +1,11 @@
 Vídeo | Aula | Commit | Link
 ------ | ------ | ------ | ------
-Vídeo 03 | Aula 02 - Configurando ApiClient | 08:02 - Configurando ApiClient | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/a77da5408dbead0e0abc479735575fc806a9dd49.zip)
-Vídeo 04 | Aula 02 - Configurando ApiClient | 08:02 - Configurando ApiClient | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/be5ca8b951c0b6a9380e97ebf87d42d6a0ee2fad.zip)
-Vídeo 05 | Aula 02 - Configurando ApiClient | 08:02 - Configurando ApiClient | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/192dcf55351749151fc0926ff4f16981c312a18e.zip)
-Vídeo 06 | Aula 02 - Configurando ApiClient | 08:02 - Configurando ApiClient | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/3fd0c1f8796e1e3c832e86d3e5102241a96f509d.zip)
-Vídeo 07 | Aula 02 - Configurando ApiClient | 08:02 - Configurando ApiClient | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/753b8ab42f3afd1c8394da405b84a2b9b27daa38.zip)
+Vídeo 02 | Aula 01 - criando projeto | 08:02 - criando projeto | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/c7349b62921122e94fe7460c32a86d139ce99f9e.zip)
+Vídeo 03 | Aula 01 - configurando tema light e dark | 08:02 - configurando tema light e dark | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/a77da5408dbead0e0abc479735575fc806a9dd49.zip)
+Vídeo 04 | Aula 01 - criando componente HPTextFormField | 08:02 -  criando componente HPTextFormField  | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/be5ca8b951c0b6a9380e97ebf87d42d6a0ee2fad.zip)
+Vídeo 05 | Aula 01 - Criando componente de search, título e botões | 08:02 - Criando componente de search | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/192dcf55351749151fc0926ff4f16981c312a18e.zip)
+Vídeo 06 | Aula 02 - criando tela home | 08:02 - criando tela home | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/3fd0c1f8796e1e3c832e86d3e5102241a96f509d.zip)
+Vídeo 07 | Aula 02 - criando logica da tela inicial | 08:02 - criando logica da tela inicial | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/753b8ab42f3afd1c8394da405b84a2b9b27daa38.zip)
 Vídeo 08 | Aula 02 - Configurando ApiClient | 08:02 - Configurando ApiClient | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/b358c1de864184c74aaa039ec350ae8439de6fda.zip)
 Vídeo 09 | Aula 03 - Construindo tela de pesquisa professor | 09:03 - Construindo tela de pesquisa professor | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/69535cd4e5ec0f1caf56a5c6624223d1162620a1.zip)
 Vídeo 10 | Aula 03 - Criando a lógica da tela de pesquisa professor | 10:03 - Criando a lógica da tela de pesquisa professor | [Download](https://github.com/treinaweb/treinaweb-flutter-hiperprof/archive/b207d58a532bd33061b20e454ade946c9e3e14f6.zip)
