@@ -38,7 +38,7 @@ Abaixo você encontrará todas as informações do quê e como deve ser desenvol
 | /api/auth/login           | POST       | Rota responsável por fazer login                                              |
 | /api/professores          | POST       | Rota responsável para cadastrar um novo professor                             |
 | /api/professores/1/alunos | POST       | Rota responsável por vincular aluno ao professor                              |
-| /professores/15/foto      | POST       | Rota responsável para cadastrar foto do professor                             |
+| /api/professores/15/foto      | POST       | Rota responsável para cadastrar foto do professor                             |
 | /api/professores          | PUT        | Rota responsável por atualizar um professor                                   |
 | /api/professores          | GET        | Rota responsável por pegar todos os professores cadastrado                    |
 | /api/professores/1        | GET        | Rota responsável por pegar um profesor especifico                             |
