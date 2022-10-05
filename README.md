@@ -335,7 +335,7 @@ Accept : application/json
 ]
 ```
 
-### Rota GET /professores/15/foto
+### Rota POST /professores/15/foto
 
 **Exemplo de requisição**
 
